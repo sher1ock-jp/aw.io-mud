@@ -1,0 +1,1 @@
+//Enemy or other player's cells.
