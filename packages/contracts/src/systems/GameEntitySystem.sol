@@ -32,7 +32,7 @@ contract GameEntitySystem is System {
         require(keccak256(abi.encodePacked(Game.getName(gameEntity))) == keccak256(abi.encodePacked(gameName)), "the game name already exists");
         CurrentPlayers.set(gameEntity, 0);
         require(maxPlayers < 5, "maxPlayers must be greater than 5");
-        require(maxPlayers > 15, "maxPlayers must be less than 20");
+        require(maxPlayers > 10, "maxPlayers must be less than 20");
         MaxPlayers.set(gameEntity, maxPlayers);
         Game.setName(gameEntity, gameName);
         Duration.set(gameEntity, duration);

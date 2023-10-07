@@ -10,7 +10,7 @@ import {
     ObjectCollisionEffect,
     ObjectEffectTime,
     ObjectQuantity,
-    ObjectCount
+    ObjectUsedQuantity
     // ObjectLifeTime,
 } from "../codegen/index.sol";
 import { 
@@ -45,8 +45,10 @@ contract ObjectEntitySystem is System {
         ObjectCollisionEffect.set(objectEntityKey, collisionEffect);
         // ObjectLifeTime.set(objectEntityKey, lifeTime);
         ObjectEffectTime.set(objectEntityKey, effectTime);
-        ObjectQuantity.set(objectEntityKey, quantity);
-        ObjectCount.set(gameEntity,objectEntityKey, 0);
+        // check if objectQuantity is greater than maxPlayers in front end
+        ObjectQuantity.set(objectEntityKey, quantity); 
+        // use gameEntity because objectEntityKey is not unique between games
+        ObjectUsedQuantity.set(gameEntity,objectEntityKey, 0);
         Game.pushEntity(gameEntity, objectEntityKey);
     }
 }
