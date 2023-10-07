@@ -22,7 +22,7 @@ enum MainObject {
 
 enum SubObject {
   SplitCell,
-  Teritory
+  Territory
 }
 
 enum Attribution {

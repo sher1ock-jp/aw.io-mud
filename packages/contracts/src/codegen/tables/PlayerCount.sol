@@ -21,15 +21,15 @@ import { ResourceId } from "@latticexyz/store/src/ResourceId.sol";
 import { RESOURCE_TABLE, RESOURCE_OFFCHAIN_TABLE } from "@latticexyz/store/src/storeResourceTypes.sol";
 
 ResourceId constant _tableId = ResourceId.wrap(
-  bytes32(abi.encodePacked(RESOURCE_TABLE, bytes14(""), bytes16("CurrentPlayers")))
+  bytes32(abi.encodePacked(RESOURCE_TABLE, bytes14(""), bytes16("PlayerCount")))
 );
-ResourceId constant CurrentPlayersTableId = _tableId;
+ResourceId constant PlayerCountTableId = _tableId;
 
 FieldLayout constant _fieldLayout = FieldLayout.wrap(
   0x0004010004000000000000000000000000000000000000000000000000000000
 );
 
-library CurrentPlayers {
+library PlayerCount {
   /**
    * @notice Get the table values' field layout.
    * @return _fieldLayout The field layout for the table.

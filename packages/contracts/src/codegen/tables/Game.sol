@@ -24,11 +24,10 @@ ResourceId constant _tableId = ResourceId.wrap(bytes32(abi.encodePacked(RESOURCE
 ResourceId constant GameTableId = _tableId;
 
 FieldLayout constant _fieldLayout = FieldLayout.wrap(
-  0x0004010204000000000000000000000000000000000000000000000000000000
+  0x0000000200000000000000000000000000000000000000000000000000000000
 );
 
 struct GameData {
-  uint32 gameId;
   string name;
   bytes32[] entity;
 }
@@ -58,10 +57,9 @@ library Game {
    * @return _valueSchema The value schema for the table.
    */
   function getValueSchema() internal pure returns (Schema) {
-    SchemaType[] memory _valueSchema = new SchemaType[](3);
-    _valueSchema[0] = SchemaType.UINT32;
-    _valueSchema[1] = SchemaType.STRING;
-    _valueSchema[2] = SchemaType.BYTES32_ARRAY;
+    SchemaType[] memory _valueSchema = new SchemaType[](2);
+    _valueSchema[0] = SchemaType.STRING;
+    _valueSchema[1] = SchemaType.BYTES32_ARRAY;
 
     return SchemaLib.encode(_valueSchema);
   }
@@ -80,10 +78,9 @@ library Game {
    * @return fieldNames An array of strings with the names of value fields.
    */
   function getFieldNames() internal pure returns (string[] memory fieldNames) {
-    fieldNames = new string[](3);
-    fieldNames[0] = "gameId";
-    fieldNames[1] = "name";
-    fieldNames[2] = "entity";
+    fieldNames = new string[](2);
+    fieldNames[0] = "name";
+    fieldNames[1] = "entity";
   }
 
   /**
@@ -105,69 +102,6 @@ library Game {
    */
   function register(IStore _store) internal {
     _store.registerTable(_tableId, _fieldLayout, getKeySchema(), getValueSchema(), getKeyNames(), getFieldNames());
-  }
-
-  /**
-   * @notice Get gameId.
-   */
-  function getGameId(bytes32 key) internal view returns (uint32 gameId) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = key;
-
-    bytes32 _blob = StoreSwitch.getStaticField(_tableId, _keyTuple, 0, _fieldLayout);
-    return (uint32(bytes4(_blob)));
-  }
-
-  /**
-   * @notice Get gameId.
-   */
-  function _getGameId(bytes32 key) internal view returns (uint32 gameId) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = key;
-
-    bytes32 _blob = StoreCore.getStaticField(_tableId, _keyTuple, 0, _fieldLayout);
-    return (uint32(bytes4(_blob)));
-  }
-
-  /**
-   * @notice Get gameId (using the specified store).
-   */
-  function getGameId(IStore _store, bytes32 key) internal view returns (uint32 gameId) {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = key;
-
-    bytes32 _blob = _store.getStaticField(_tableId, _keyTuple, 0, _fieldLayout);
-    return (uint32(bytes4(_blob)));
-  }
-
-  /**
-   * @notice Set gameId.
-   */
-  function setGameId(bytes32 key, uint32 gameId) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = key;
-
-    StoreSwitch.setStaticField(_tableId, _keyTuple, 0, abi.encodePacked((gameId)), _fieldLayout);
-  }
-
-  /**
-   * @notice Set gameId.
-   */
-  function _setGameId(bytes32 key, uint32 gameId) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = key;
-
-    StoreCore.setStaticField(_tableId, _keyTuple, 0, abi.encodePacked((gameId)), _fieldLayout);
-  }
-
-  /**
-   * @notice Set gameId (using the specified store).
-   */
-  function setGameId(IStore _store, bytes32 key, uint32 gameId) internal {
-    bytes32[] memory _keyTuple = new bytes32[](1);
-    _keyTuple[0] = key;
-
-    _store.setStaticField(_tableId, _keyTuple, 0, abi.encodePacked((gameId)), _fieldLayout);
   }
 
   /**
@@ -704,9 +638,8 @@ library Game {
   /**
    * @notice Set the full data using individual values.
    */
-  function set(bytes32 key, uint32 gameId, string memory name, bytes32[] memory entity) internal {
-    bytes memory _staticData = encodeStatic(gameId);
-
+  function set(bytes32 key, string memory name, bytes32[] memory entity) internal {
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(name, entity);
     bytes memory _dynamicData = encodeDynamic(name, entity);
 
@@ -719,9 +652,8 @@ library Game {
   /**
    * @notice Set the full data using individual values.
    */
-  function _set(bytes32 key, uint32 gameId, string memory name, bytes32[] memory entity) internal {
-    bytes memory _staticData = encodeStatic(gameId);
-
+  function _set(bytes32 key, string memory name, bytes32[] memory entity) internal {
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(name, entity);
     bytes memory _dynamicData = encodeDynamic(name, entity);
 
@@ -734,9 +666,8 @@ library Game {
   /**
    * @notice Set the full data using individual values (using the specified store).
    */
-  function set(IStore _store, bytes32 key, uint32 gameId, string memory name, bytes32[] memory entity) internal {
-    bytes memory _staticData = encodeStatic(gameId);
-
+  function set(IStore _store, bytes32 key, string memory name, bytes32[] memory entity) internal {
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(name, entity);
     bytes memory _dynamicData = encodeDynamic(name, entity);
 
@@ -750,8 +681,7 @@ library Game {
    * @notice Set the full data using the data struct.
    */
   function set(bytes32 key, GameData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.gameId);
-
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(_table.name, _table.entity);
     bytes memory _dynamicData = encodeDynamic(_table.name, _table.entity);
 
@@ -765,8 +695,7 @@ library Game {
    * @notice Set the full data using the data struct.
    */
   function _set(bytes32 key, GameData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.gameId);
-
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(_table.name, _table.entity);
     bytes memory _dynamicData = encodeDynamic(_table.name, _table.entity);
 
@@ -780,8 +709,7 @@ library Game {
    * @notice Set the full data using the data struct (using the specified store).
    */
   function set(IStore _store, bytes32 key, GameData memory _table) internal {
-    bytes memory _staticData = encodeStatic(_table.gameId);
-
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(_table.name, _table.entity);
     bytes memory _dynamicData = encodeDynamic(_table.name, _table.entity);
 
@@ -789,13 +717,6 @@ library Game {
     _keyTuple[0] = key;
 
     _store.setRecord(_tableId, _keyTuple, _staticData, _encodedLengths, _dynamicData);
-  }
-
-  /**
-   * @notice Decode the tightly packed blob of static data using this table's field layout.
-   */
-  function decodeStatic(bytes memory _blob) internal pure returns (uint32 gameId) {
-    gameId = (uint32(Bytes.slice4(_blob, 0)));
   }
 
   /**
@@ -821,17 +742,15 @@ library Game {
 
   /**
    * @notice Decode the tightly packed blobs using this table's field layout.
-   * @param _staticData Tightly packed static fields.
+   *
    * @param _encodedLengths Encoded lengths of dynamic fields.
    * @param _dynamicData Tightly packed dynamic fields.
    */
   function decode(
-    bytes memory _staticData,
+    bytes memory,
     PackedCounter _encodedLengths,
     bytes memory _dynamicData
   ) internal pure returns (GameData memory _table) {
-    (_table.gameId) = decodeStatic(_staticData);
-
     (_table.name, _table.entity) = decodeDynamic(_encodedLengths, _dynamicData);
   }
 
@@ -866,14 +785,6 @@ library Game {
   }
 
   /**
-   * @notice Tightly pack static (fixed length) data using this table's schema.
-   * @return The static data, encoded into a sequence of bytes.
-   */
-  function encodeStatic(uint32 gameId) internal pure returns (bytes memory) {
-    return abi.encodePacked(gameId);
-  }
-
-  /**
    * @notice Tightly pack dynamic data lengths using this table's schema.
    * @return _encodedLengths The lengths of the dynamic fields (packed into a single bytes32 value).
    */
@@ -902,12 +813,10 @@ library Game {
    * @return The dyanmic (variable length) data, encoded into a sequence of bytes.
    */
   function encode(
-    uint32 gameId,
     string memory name,
     bytes32[] memory entity
   ) internal pure returns (bytes memory, PackedCounter, bytes memory) {
-    bytes memory _staticData = encodeStatic(gameId);
-
+    bytes memory _staticData;
     PackedCounter _encodedLengths = encodeLengths(name, entity);
     bytes memory _dynamicData = encodeDynamic(name, entity);
 

@@ -10,7 +10,7 @@ import { IsPlay, IsPlayTableId } from "./tables/IsPlay.sol";
 import { PlayerMainEntity, PlayerMainEntityTableId } from "./tables/PlayerMainEntity.sol";
 import { PlayerSubEntity, PlayerSubEntityTableId } from "./tables/PlayerSubEntity.sol";
 import { BestScore, BestScoreData, BestScoreTableId } from "./tables/BestScore.sol";
-import { CurrentPlayers, CurrentPlayersTableId } from "./tables/CurrentPlayers.sol";
+import { PlayerCount, PlayerCountTableId } from "./tables/PlayerCount.sol";
 import { MaxPlayers, MaxPlayersTableId } from "./tables/MaxPlayers.sol";
 import { Game, GameData, GameTableId } from "./tables/Game.sol";
 import { Duration, DurationTableId } from "./tables/Duration.sol";
@@ -22,7 +22,7 @@ import { ObjectCollision, ObjectCollisionTableId } from "./tables/ObjectCollisio
 import { ObjectCollisionEffect, ObjectCollisionEffectTableId } from "./tables/ObjectCollisionEffect.sol";
 import { ObjectEffectTime, ObjectEffectTimeTableId } from "./tables/ObjectEffectTime.sol";
 import { ObjectQuantity, ObjectQuantityTableId } from "./tables/ObjectQuantity.sol";
-import { ObjectCount, ObjectCountTableId } from "./tables/ObjectCount.sol";
+import { ObjectUsedQuantity, ObjectUsedQuantityTableId } from "./tables/ObjectUsedQuantity.sol";
 import { ObjectCoordinate, ObjectCoordinateData, ObjectCoordinateTableId } from "./tables/ObjectCoordinate.sol";
 import { ObjectDrawing, ObjectDrawingData, ObjectDrawingTableId } from "./tables/ObjectDrawing.sol";
 import { GameProgress, GameProgressTableId } from "./tables/GameProgress.sol";
