@@ -34,12 +34,11 @@ export default mudConfig({
     //
     // game component
     //
-    CurrentPlayers: "uint32", 
+    PlayerCount: "uint32", 
     MaxPlayers: "uint32", // fiexed 10
 
     Game: {
       valueSchema: {
-        gameId: "uint32",
         name: "string",
         entity: "bytes32[]",
       },
@@ -56,7 +55,7 @@ export default mudConfig({
     // ObjectLifeTime: "uint32",
     ObjectEffectTime: "uint32",
     ObjectQuantity: "uint32",
-    ObjectCount: {
+    ObjectUsedQuantity: {
       keySchema: {
         gameName: "bytes32",
         entity: "bytes32",
@@ -101,7 +100,7 @@ export default mudConfig({
     VictoryCondition: ["LastManStanding", "MostPoints", "MostTeritory"],
     TerrainKind: ["Square","Flat"],
     MainObject: ["Cell","Food","Virus","Trail"],
-    SubObject: ["SplitCell","Teritory"],
+    SubObject: ["SplitCell","Territory"],
     Attribution: ["Movable", "Immovable"],
     CollisionDetection: ["NoCollision", "PartialOverlap", "FullOverlap", "Crossing", "Touching"],
     CollisionEffect:["GainLives","LoseLives","GainPoints", "LosePoints","SpeedUp", "SpeedDown","Absorb", "Stun"],
