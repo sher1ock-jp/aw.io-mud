@@ -62,20 +62,22 @@ export const startAsGuest = (name: string, socket: any) => (dispatch: any)  => {
     }
 };
 
-export default (state = initialState, action: NicknameActions): PlayerInfoState => {
+const reducer = (state = initialState, action: NicknameActions): PlayerInfoState => {
     switch(action.type){
-        case NicknameActionTypes.SET_NICKNAME:
-            return { ...state, nickname: action.name };
-        case NicknameActionTypes.RESET_NICKNAME:
-            return { ...state, nickname: '' };
-        case NicknameActionTypes.SET_ERROR:
-            return { ...state, error: action.error };
-        case NicknameActionTypes.RESET_ERROR:
-            return { ...state, error: null };
-        default:
-            return state;
+    case NicknameActionTypes.SET_NICKNAME:
+        return { ...state, nickname: action.name };
+    case NicknameActionTypes.RESET_NICKNAME:
+        return { ...state, nickname: '' };
+    case NicknameActionTypes.SET_ERROR:
+        return { ...state, error: action.error };
+    case NicknameActionTypes.RESET_ERROR:
+        return { ...state, error: null };
+    default:
+        return state;
     }
-};
+  };
+  
+  export default reducer;
 
 
 
