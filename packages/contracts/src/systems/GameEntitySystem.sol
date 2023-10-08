@@ -3,7 +3,7 @@ pragma solidity >=0.8.0;
 
 import { System } from "@latticexyz/world/src/System.sol";
 import {
-    CurrentPlayers,
+    PlayerCount,
     MaxPlayers,
     Game,
     Duration,
@@ -30,7 +30,7 @@ contract GameEntitySystem is System {
     ) public {
         bytes32 gameEntity = StringToEntityKey(gameName);
         require(keccak256(abi.encodePacked(Game.getName(gameEntity))) == keccak256(abi.encodePacked(gameName)), "the game name already exists");
-        CurrentPlayers.set(gameEntity, 0);
+        PlayerCount.set(gameEntity, 0);
         require(maxPlayers < 5, "maxPlayers must be greater than 5");
         require(maxPlayers > 10, "maxPlayers must be less than 20");
         MaxPlayers.set(gameEntity, maxPlayers);
