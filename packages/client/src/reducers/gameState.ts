@@ -51,14 +51,14 @@ export const stopChat = (): StopChatAction => ({
     type: GameActionTypes.STOP_CHAT,
 });
 
-export const setNickname = (text: string): SetNicknameAction => ({
+export const setNickname = (nickname: string): SetNicknameAction => ({
     type: GameActionTypes.SET_NICKNAME,
-    text,
+    nickname,
 });
 
-export const setWorld = (text: string): SetWorldAction => ({
+export const setWorld = (world: string): SetWorldAction => ({
     type: GameActionTypes.SET_WORLD,
-    text,
+    world,
 });
 
 export const setError = (error: string): SetErrorAction => ({
@@ -146,12 +146,12 @@ export default (state = initialState, action: GameActions): GameState => {
         case GameActionTypes.SET_NICKNAME:
             return {
                 ...state,
-                nickname: action.text,
+                nickname: action.nickname,
             };
         case GameActionTypes.SET_WORLD:
             return {
                 ...state,
-                world: action.text,
+                world: action.world,
             };
         case GameActionTypes.SET_ERROR:
             return {
