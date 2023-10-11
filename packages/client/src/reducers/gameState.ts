@@ -1,14 +1,25 @@
 import { Dispatch } from 'redux';
 
-type GameState = {
-    isPlaying: boolean;
-    isChatting: boolean;
-    nickname: string;
-    world: string;
-    status: string;
-    error: string | null;
-    isInitialized: boolean;
-};
+import {
+    GameState,
+    GameActionTypes,
+    StartGameAction,
+    StopGameAction,
+    InitializedAction,
+    StartChatAction,
+    StopChatAction,
+    SetNicknameAction,
+    SetWorldAction,
+    SetErrorAction,
+    ResetErrorAction,
+    HideInstructionsAction,
+    LoseAction,
+    ContinueAction,
+    AteAction,
+    FellAction,
+    AteSomeoneAction,
+    GameActions,
+} from '../types/gameStateTypes';
 
 const initialState: GameState = {
     isPlaying: false,
@@ -19,93 +30,6 @@ const initialState: GameState = {
     error: null,
     isInitialized: false,
 };
-
-export enum GameActionTypes {
-    START_GAME = 'START_GAME',
-    STOP_GAME = 'STOP_GAME',
-    INITIALIZED = 'INITIALIZED',
-    START_CHAT = 'START_CHAT',
-    STOP_CHAT = 'STOP_CHAT',
-    SET_NICKNAME = 'SET_NICKNAME',
-    SET_WORLD = 'SET_WORLD',
-    SET_ERROR = 'SET_ERROR',
-    RESET_ERROR = 'RESET_ERROR',
-    HIDE_INSTRUCTIONS = 'HIDE_INSTRUCTIONS',
-    LOSE = 'LOSE',
-    CONTINUE = 'CONTINUE',
-    ATE = 'ATE',
-    FELL = 'FELL'
-}
-
-interface StartGameAction {
-    type: GameActionTypes.START_GAME;
-}
-
-interface StopGameAction {
-    type: GameActionTypes.STOP_GAME;
-}
-
-interface InitializedAction {
-    type: GameActionTypes.INITIALIZED;
-}
-
-interface StartChatAction {
-    type: GameActionTypes.START_CHAT;
-}
-
-interface StopChatAction {
-    type: GameActionTypes.STOP_CHAT;
-}
-
-interface SetNicknameAction {
-    type: GameActionTypes.SET_NICKNAME;
-    text: string;
-}
-
-interface SetWorldAction {
-    type: GameActionTypes.SET_WORLD;
-    text: string;
-}
-
-interface SetErrorAction {
-    type: GameActionTypes.SET_ERROR;
-    error: string;
-}
-
-interface ResetErrorAction {
-    type: GameActionTypes.RESET_ERROR;
-}
-
-interface HideInstructionsAction {
-    type: GameActionTypes.HIDE_INSTRUCTIONS;
-}
-
-interface LoseAction {
-    type: GameActionTypes.LOSE;
-    eater: string;
-}
-
-
-interface ContinueAction {
-    type: GameActionTypes.CONTINUE;
-}
-
-interface AteAction {
-    type: GameActionTypes.ATE;
-}
-
-interface FellAction {
-    type: GameActionTypes.FELL;
-    world: string;
-}
-
-
-interface AteSomeoneAction {
-    type: GameActionTypes.ATE;
-    eater: string;
-}
-
-type GameActions = StartGameAction | StopGameAction | InitializedAction | StartChatAction | StopChatAction | SetNicknameAction | SetWorldAction | SetErrorAction | ResetErrorAction | HideInstructionsAction | LoseAction | ContinueAction | AteAction | FellAction | AteSomeoneAction;
 
 export const startGame = (): StartGameAction => ({
     type: GameActionTypes.START_GAME,

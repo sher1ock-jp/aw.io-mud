@@ -1,35 +1,18 @@
-type AbilitiesState = {
-    launch: boolean;
-    meter: string;
-};
+import {
+    AbilitiesState,
+    AbilitiesActionTypes,
+    LaunchAction,
+    LaunchReadyAction,
+    BuildAction,
+    AbilitiesActions
+} from "../types/abilitiesTypes";
 
 const initialState: AbilitiesState = {
     launch: false,
     meter: '               ',
 };
 
-export enum AbilitiesActionTypes {
-    LAUNCH = 'LAUNCH',
-    LAUNCH_READY = 'LAUNCH_READY',
-    BUILD = 'BUILD',
-}
-
-interface LaunchAction {
-    type: AbilitiesActionTypes.LAUNCH;
-}
-
-interface LaunchReadyAction {
-    type: AbilitiesActionTypes.LAUNCH_READY;
-}
-
-interface BuildAction {
-    type: AbilitiesActionTypes.BUILD;
-    meter: string;
-}
-
-type AbilitiesActions = LaunchAction | LaunchReadyAction | BuildAction;
-
-export const lauch = (): LaunchAction => ({
+export const launch = (): LaunchAction => ({
     type: AbilitiesActionTypes.LAUNCH,
 });
 

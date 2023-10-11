@@ -1,39 +1,17 @@
-type PlayerInfoState = {
-    nickname: string;
-    error: string | null;
-};
+import {
+    PlayerInfoState,
+    NicknameActionTypes,
+    SetNicknameAction,
+    ResetNicknameAction,
+    SetErrorAction,
+    ResetErrorAction,
+    NicknameActions,
+} from '../types/controlPanelTypes';
 
 const initialState: PlayerInfoState = {
     nickname: '',
     error: null,
 };
-
-export enum NicknameActionTypes {
-    SET_NICKNAME = 'SET_NICKNAME',
-    RESET_NICKNAME = 'RESET_NICKNAME',
-    SET_ERROR = 'SET_ERROR',
-    RESET_ERROR = 'RESET_ERROR',
-}
-
-interface SetNicknameAction {
-    type: NicknameActionTypes.SET_NICKNAME;
-    name: string;
-}
-
-interface ResetNicknameAction {
-    type: NicknameActionTypes.RESET_NICKNAME;
-}
-
-interface SetErrorAction {
-    type: NicknameActionTypes.SET_ERROR;
-    error: string;
-}
-
-interface ResetErrorAction {
-    type: NicknameActionTypes.RESET_ERROR;
-}
-
-type NicknameActions = SetNicknameAction | ResetNicknameAction | SetErrorAction | ResetErrorAction;
 
 export const setNickname = (name: string): SetNicknameAction => ({
     type: NicknameActionTypes.SET_NICKNAME,

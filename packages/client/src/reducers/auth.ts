@@ -1,27 +1,13 @@
-type User = {
-    id: number;
-    name: string;
-};
-
-type AuthState = User | null;
+import {
+    User,
+    AuthState,
+    AuthenticatedAction,
+    AuthActionTypes,
+    LogoutAction,
+    AuthActions
+} from '../types/authTypes';
 
 const initialState: AuthState = null;
-
-export enum AuthActionTypes {
-    AUTHENTICATED = 'AUTHENTICATED',
-    LOGOUT = 'LOGOUT',
-}
-
-interface AuthenticatedAction {
-    type: AuthActionTypes.AUTHENTICATED;
-    user: User;
-}
-
-interface LogoutAction {
-    type: AuthActionTypes.LOGOUT;
-}
-
-type AuthActions = AuthenticatedAction | LogoutAction;
 
 export const authenticated = (user: User): AuthenticatedAction => ({
     type: AuthActionTypes.AUTHENTICATED,

@@ -1,37 +1,14 @@
-type FoodState = {
-  [id: string]: any;
-};
+import {
+  FoodState,
+  FoodActions,
+  FoodActionTypes,
+  ReceiveFoodAction,
+  ReceiveMultipleFoodAction,
+  RemoveFoodAction,
+  RemoveAllFoodAction
+} from '../types/foodTypes';
 
 const initialState: FoodState = {};
-
-export enum FoodActionTypes {
-  RECEIVE_FOOD = 'RECEIVE_FOOD',
-  RECEIVE_MULTIPLE_FOOD = 'RECEIVE_MULTIPLE_FOOD',
-  REMOVE_FOOD = 'REMOVE_FOOD',
-  REMOVE_ALL_FOOD = 'REMOVE_ALL_FOOD',
-}
-
-interface ReceiveFoodAction {
-  type: FoodActionTypes.RECEIVE_FOOD;
-  id: string;
-  data: any;  
-}
-
-interface ReceiveMultipleFoodAction {
-  type: FoodActionTypes.RECEIVE_MULTIPLE_FOOD;
-  food: FoodState;
-}
-
-interface RemoveFoodAction {
-  type: FoodActionTypes.REMOVE_FOOD;
-  id: string;
-}
-
-interface RemoveAllFoodAction {
-  type: FoodActionTypes.REMOVE_ALL_FOOD;
-}
-
-type FoodActions = ReceiveFoodAction | ReceiveMultipleFoodAction | RemoveFoodAction | RemoveAllFoodAction;
 
 export const receiveFood = (id: string, data: any): ReceiveFoodAction => ({
   type: FoodActionTypes.RECEIVE_FOOD,

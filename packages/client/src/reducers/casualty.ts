@@ -1,26 +1,15 @@
 import { Dispatch } from 'redux';
 import store from '../store';
 
-type CasualtyState = string[];
+import {
+    CasualtyState,
+    CasualtyActionTypes,
+    CasualtyReportAction,
+    RemoveListingAction,
+    CasualtyActions,
+} from '../types/casualtyTypes';
 
 const initialState: CasualtyState = [];
-
-export enum CasualtyActionTypes {
-    CASUALTY_REPORT = 'CASUALTY_REPORT',
-    REMOVE_LISTING = 'REMOVE_LISTING',
-}
-
-interface CasualtyReportAction {
-    type: CasualtyActionTypes.CASUALTY_REPORT;
-    eatenName: string;
-    eaterName: string;
-}
-
-interface RemoveListingAction {
-    type: CasualtyActionTypes.REMOVE_LISTING;
-}
-
-type CasualtyActions = CasualtyReportAction | RemoveListingAction;
 
 export const casualtyReport = (eatenName: string, eaterName: string): CasualtyReportAction => ({
     type: CasualtyActionTypes.CASUALTY_REPORT,
