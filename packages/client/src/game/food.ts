@@ -10,7 +10,7 @@ import { FoodData } from '../types/DataTypes';
 
 import {
   CustomMesh,
-} from '../types/cannonTypes';
+} from '../types/meshTypes';
 
 export class Food {
   private id: string;
@@ -63,11 +63,6 @@ export class Food {
     }
 
     const mesh = new THREE.Mesh(geometry, material) as CustomMesh;
-
-    if(mesh === undefined) {
-      throw new Error("Mesh is undefined");
-    }
-
     mesh.name = this.id;
     mesh.castShadow = true;
     mesh.position.set(x, y, z);
