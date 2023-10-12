@@ -4,6 +4,13 @@ type ColorPalette = {
     blue?: string;
     pink?: string;
     red?: string;
+    purple?: string;
+    darkBlue?: string;
+    lightGreen?: string;
+    charcoal?: string;
+    brickRed?: string;
+    teal?: string;
+    slateTeal?: string;
     [key: string]: string | undefined; 
 };
 
@@ -18,12 +25,15 @@ export const foodColors = (): ColorPalette => {
 };
 
 export const playerColors = (): ColorPalette => {
-    // プレイヤー用の色をここで定義
     return {
-        grey: '#A1A1A1',
-        green: '#88F234',
-        blue: '#1234AB',
-        // その他の色
+        purple: '#6C5B7B',
+        darkBlue: '#355C7D',
+        lightGreen: '#99B898',
+        charcoal: '#2A363B',
+        grey: '#A8A7A7',
+        brickRed: '#b45431',
+        teal: '#37797b',
+        slateTeal: '#547980'
     };
 };
 
