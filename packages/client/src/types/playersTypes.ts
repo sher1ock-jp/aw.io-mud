@@ -1,11 +1,8 @@
 import { GenericAction } from "./commonTypes";
-
-export interface Player {
-    id: string;
-}
+import { PlayerData } from "./DataTypes";
 
 export interface PlayersState {
-    [key: string]: Player;
+    [key: string]: PlayerData;
 }
 
 export enum ActionTypes {
