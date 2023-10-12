@@ -1,5 +1,5 @@
 import { scene, world, groundMaterial } from './game';
-import { myColors } from './config';
+import { foodColors } from './config';
 import socket from '../socket';
 import store from '../store';
 
@@ -8,21 +8,9 @@ import * as CANNON from 'cannon';
 
 import { FoodData } from '../types/DataTypes';
 
-interface CustomMesh extends THREE.Mesh {
-  cannon?: CANNON.Body;
-}
-
-interface CustomShape extends CANNON.Shape {
-    volume(): number;
-}
-
-interface CustomBody extends CANNON.Body {
-    shapes: CustomShape[];
-}
-
-interface CustomMesh extends THREE.Mesh {
-    cannon?: CustomBody;
-}
+import {
+  CustomMesh,
+} from '../types/cannonTypes';
 
 export class Food {
   private id: string;
@@ -38,7 +26,7 @@ export class Food {
   }
 
   init(): void {
-    const someColors = myColors();
+    const someColors = foodColors();
     let count = 0;
 
     for (const prop in someColors) {
