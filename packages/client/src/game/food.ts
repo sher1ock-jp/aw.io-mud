@@ -15,7 +15,7 @@ import {
 export class Food {
   private id: string;
   private initialData: FoodData;
-  public mesh?: THREE.Mesh;
+  public mesh?: CustomMesh;
   private eaten: boolean;
   private color: string | null = null;
 
@@ -62,7 +62,7 @@ export class Food {
         shape = new CANNON.Sphere(params[0]);
     }
 
-    const mesh: CustomMesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, material) as CustomMesh;
 
     if(mesh === undefined) {
       throw new Error("Mesh is undefined");
@@ -81,29 +81,29 @@ export class Food {
     mesh.position.add(mesh.position.clone().normalize().multiplyScalar(params[0] * 2.5));
     mesh.lookAt(new THREE.Vector3(0, 0, 0));
 
-    mesh["cannon"] = new CANNON.Body({ shape, mass: 0, material: groundMaterial });
-    mesh["cannon"].position.set(mesh.position.x, mesh.position.y, mesh.position.z);
-    mesh["cannon"].quaternion.set(-mesh.quaternion.x, -mesh.quaternion.y, -mesh.quaternion.z, mesh.quaternion.w);
+    mesh.cannon = new CANNON.Body({ shape, mass: 0, material: groundMaterial });
+    mesh.cannon.position.set(mesh.position.x, mesh.position.y, mesh.position.z);
+    mesh.cannon.quaternion.set(-mesh.quaternion.x, -mesh.quaternion.y, -mesh.quaternion.z, mesh.quaternion.w);
 
     if (type === "moon") {
-      mesh["cannon"].collisionResponse = true;
+      mesh.cannon.collisionResponse = true;
     } else {
-      mesh["cannon"].collisionResponse = false;
+      mesh.cannon.collisionResponse = false;
     }
 
-    mesh["cannon"].addEventListener('collide', (e: any) => {
+    mesh.cannon.addEventListener('collide', (e: any) => {
       const player = scene.getObjectByName(socket.id) as any;
 
       if (!this.eaten && player) {
         for (const contact of world.contacts) {
-          const foodHits = contact.bi === mesh["cannon"];
+          const foodHits = contact.bi === mesh.cannon;
           const playerIsHit = contact.bj === player.cannon;
           const playerHits = contact.bi === player.cannon;
-          const foodIsHit = contact.bj === mesh["cannon"];
+          const foodIsHit = contact.bj === mesh.cannon;
 
           if (foodHits && playerIsHit || playerHits && foodIsHit) {
             const playerVol = store.getState().players[socket.id].volume;
-            const foodVol = (mesh["cannon"] as CANNON.Body).shapes[0].volume();
+            const foodVol = (mesh.cannon as CANNON.Body).shapes[0].volume();
 
             if (playerVol > foodVol) {
               this.eaten = true;
@@ -115,7 +115,7 @@ export class Food {
     });
 
     scene.add(mesh);
-    world.add(mesh["cannon"]);
+    world.add(mesh.cannon);
 
     this.mesh = mesh;
   }
