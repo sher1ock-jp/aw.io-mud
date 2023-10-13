@@ -3,7 +3,7 @@ import {
     AbilitiesActionTypes,
     LaunchAction,
     LaunchReadyAction,
-    BuildAction,
+    BuildUpAction,
     AbilitiesActions
 } from "../types/abilitiesTypes";
 
@@ -20,13 +20,13 @@ export const launchReady = (): LaunchReadyAction => ({
     type: AbilitiesActionTypes.LAUNCH_READY,
 });
 
-export const build = (num: number): BuildAction => {
+export const buildUp = (num: number): BuildUpAction => {
     let meter = '';
     for (let i = 0; i < num; i++) {
         meter = '|' + meter;
     }
     return {
-        type: AbilitiesActionTypes.BUILD,
+        type: AbilitiesActionTypes.BUILDUP,
         meter,
     };
 };
@@ -37,7 +37,7 @@ export default (state = initialState, action: AbilitiesActions): AbilitiesState 
         return { ...state, launch: false, meter: '' };
       case AbilitiesActionTypes.LAUNCH_READY:
         return { ...state, launch: true };
-      case AbilitiesActionTypes.BUILD:
+      case AbilitiesActionTypes.BUILDUP:
         return { ...state, meter: action.meter };
       default:
         return state;

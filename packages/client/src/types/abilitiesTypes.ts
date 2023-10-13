@@ -6,7 +6,7 @@ export type AbilitiesState = {
 export enum AbilitiesActionTypes {
     LAUNCH = 'LAUNCH',
     LAUNCH_READY = 'LAUNCH_READY',
-    BUILD = 'BUILD',
+    BUILDUP = 'BUILDUP',
 }
 
 // Generic action type for actions without additional data
@@ -19,9 +19,9 @@ export type LaunchAction = GenericAction<AbilitiesActionTypes.LAUNCH>;
 export type LaunchReadyAction = GenericAction<AbilitiesActionTypes.LAUNCH_READY>;
 
 // Build action remains the same, as it has an additional 'meter' property
-export interface BuildAction {
-    type: AbilitiesActionTypes.BUILD;
+export interface BuildUpAction {
+    type: AbilitiesActionTypes.BUILDUP;
     meter: string;
 }
 
-export type AbilitiesActions = LaunchAction | LaunchReadyAction | BuildAction;
+export type AbilitiesActions = LaunchAction | LaunchReadyAction | BuildUpAction;
