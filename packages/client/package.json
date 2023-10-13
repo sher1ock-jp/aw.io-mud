@@ -33,6 +33,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
     "rxjs": "7.5.5",
+    "socket.io-client": "^4.7.2",
     "three": "^0.157.0",
     "viem": "1.14.0"
   },
