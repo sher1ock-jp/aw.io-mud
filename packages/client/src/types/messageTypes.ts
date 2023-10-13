@@ -1,7 +1,7 @@
 import { GenericAction } from "./commonTypes";
 
 export type Message = {
-    id: number;
+    // id: number;
     text: string;
 };
 
