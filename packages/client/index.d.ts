@@ -1,0 +1,1 @@
+declare module 'createjs/builds/1.0.0/createjs.js';
