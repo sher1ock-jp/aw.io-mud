@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Splash from './Splash';
-import Game from './Game';
-import ControlPanel from './ControlPanel';
+import Splash from './components/splash';
+import Game from './components/game';
+import ControlPanel from './components/controlPanel';
 
 type GameState = {
   isPlaying: boolean;
