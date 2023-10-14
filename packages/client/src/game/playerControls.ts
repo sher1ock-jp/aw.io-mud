@@ -4,7 +4,7 @@ import socket from '../socket';
 import * as THREE from 'three';
 import * as CANNON from 'cannon';
 
-interface PlayerControlsConfig {
+export interface PlayerControlsConfig {
     camera: THREE.PerspectiveCamera;
     player: THREE.Object3D;
     cannonMesh: CANNON.Body;
@@ -38,7 +38,7 @@ class PlayerControls extends THREE.EventDispatcher {
 
     constructor({ camera, player, cannonMesh, id }: PlayerControlsConfig) {
         super();
-
+		
         this.domElement = document;
         this.camera = camera;
         this.player = player;
@@ -131,8 +131,8 @@ class PlayerControls extends THREE.EventDispatcher {
 
 		this.camera.matrix = oneTwoThree;
 	}
-	
 
+	// Handles user input and updates the player's movement and actions
     private checkKeyStates(): void {
         const { isChatting } = store.getState().gameState;
 
