@@ -1,4 +1,6 @@
 import { Dispatch } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux'; 
 
 import {
     GameState,
@@ -79,7 +81,7 @@ export const lose = (eater: string): LoseAction => ({
     eater: eater.length > 15 ? `${eater.slice(0, 14)}...` : eater,
 });
 
-export const continueGame = (): ContinueAction => ({
+export const keepPlaying = (): ContinueAction => ({
     type: GameActionTypes.CONTINUE,
 });
 
@@ -97,7 +99,8 @@ export const ateSomeone = (eater: string): AteSomeoneAction => ({
     eater: eater.length > 15 ? `${eater.slice(0, 14)}...` : eater,
 });
 
-export const startAsGuest = (nickname: string, socket: any) => (dispatch: Dispatch) => {
+export const startAsGuest = (nickname: string, socket: any): ThunkAction<void, GameState, unknown, AnyAction> => 
+(dispatch: ThunkDispatch<GameState, unknown, AnyAction>) => {
     if (nickname) {
       socket.emit('start_as_guest', { nickname });
       dispatch(resetError());

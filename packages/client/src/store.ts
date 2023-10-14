@@ -1,5 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import reducer from './reducers';
 
 declare global {
@@ -8,11 +7,15 @@ declare global {
     }
 }
 
-const middleware = [thunk]; 
+const store = configureStore({
+  reducer: reducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
+    // Add additional middlewares here, but for this case, you just have thunk
+    // which is already included by default with `@reduxjs/toolkit`.
+  ]),
+});
 
-const store = createStore(reducer, applyMiddleware(...middleware));
-
-// use this onlu in development
+// Use this only in development
 window.store = store;
 
 export default store;
