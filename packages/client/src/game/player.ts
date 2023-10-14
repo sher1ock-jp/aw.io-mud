@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon';
-import PlayerControls from './PlayerControls';
+import PlayerControls from './playerControls';
 import store from '../store';
 import socket from '../socket';
 import { makeTextSprite } from './utils';
@@ -162,13 +162,13 @@ export class Player {
         }
     
         // add controls and camera
-        if (isMainPlayer) {
-            controls = new (THREE as any).PlayerControls(
-                camera,
-                this.mesh,
-                this.mesh.cannon,
-                id,
-            );
+        if (isMainPlayer && this.mesh.cannon) {
+            controls = new PlayerControls({
+                camera: camera,
+                player: this.mesh,
+                cannonMesh: this.mesh.cannon,
+                id: id
+            });
         }
     }
 }

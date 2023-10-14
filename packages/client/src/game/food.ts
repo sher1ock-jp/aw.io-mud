@@ -1,4 +1,4 @@
-import { scene, world, groundMaterial } from './game';
+import { scene, world, groundMaterial } from './main';
 import { foodColors } from './config';
 import socket from '../socket';
 import store from '../store';
